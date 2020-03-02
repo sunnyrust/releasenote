@@ -7,3 +7,18 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rustyline = "5.0.3"
+ansi_term = "0.12.1"
+clap = "2.33.0"
+libc = "0.2.65"
+encoding = "0.2.33"
+encodingbufreader = "0.1.1"
+time = "0.1.42"
+serde_json = "1.0.48"
+serde = { version = "1.0", features = ["derive"] }
+markdown = "0.2.0"
+rusqlite = { version = "0.21.0", features = ["bundled"] }
+
+#[dependencies.rusqlite]
+#version = "0.21.0"
+#features = ["bundled"]

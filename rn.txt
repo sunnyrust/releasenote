@@ -1,0 +1,5 @@
+{"name":"SmartOMP","version":"V1.0.1.3-20200301","address":"10.11.35.104:9099","git":"a1d7c36ccc449178254458e14319c8985fe76253","docker":"dockerhub.cloudminds.com/SmartOMP-101","pubtime":"2020-03-01 19:58:25"}
+{"name":"FRAS","version":"V1.0.1.3-20200301","address":"10.11.35.104:9099","git":"a1d7c36ccc449178254458e14319c8985fe76253","docker":"dockerhub.cloudminds.com/SmartOMP-101","pubtime":"2020-03-01 19:58:25"}
+{"name":"ServiceApp","version":"V1.0.1.3-20200301","address":"10.11.35.104:9099","git":"a1d7c36ccc449178254458e14319c8985fe76253","docker":"dockerhub.cloudminds.com/SmartOMP-101","pubtime":"2020-03-01 19:58:25"}
+{"name":"InterfaceAssistant","version":"V1.0.1.3-20200301","address":"10.11.35.104:9099","git":"a1d7c36ccc449178254458e14319c8985fe76253","docker":"dockerhub.cloudminds.com/SmartOMP-101","pubtime":"2020-03-01 19:58:25"}
+{"name":"PSP","version":"V1.0.1.3-20200301","address":"10.11.35.104:9099","git":"a1d7c36ccc449178254458e14319c8985fe76253","docker":"dockerhub.cloudminds.com/SmartOMP-101","pubtime":"2020-03-01 19:58:25"}
