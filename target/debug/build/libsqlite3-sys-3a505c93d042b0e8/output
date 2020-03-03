@@ -1,0 +1,351 @@
+cargo:rerun-if-env-changed=SQLITE_MAX_VARIABLE_NUMBER
+cargo:rerun-if-env-changed=SQLITE_MAX_EXPR_DEPTH
+TARGET = Some("x86_64-unknown-linux-gnu")
+OPT_LEVEL = Some("0")
+HOST = Some("x86_64-unknown-linux-gnu")
+CC_x86_64-unknown-linux-gnu = None
+CC_x86_64_unknown_linux_gnu = None
+HOST_CC = None
+CC = None
+CFLAGS_x86_64-unknown-linux-gnu = None
+CFLAGS_x86_64_unknown_linux_gnu = None
+HOST_CFLAGS = None
+CFLAGS = None
+CRATE_CC_NO_DEFAULTS = None
+DEBUG = Some("true")
+CARGO_CFG_TARGET_FEATURE = Some("fxsr,sse,sse2")
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-m64" "-Wall" "-Wextra" "-DSQLITE_CORE" "-DSQLITE_DEFAULT_FOREIGN_KEYS=1" "-DSQLITE_ENABLE_API_ARMOR" "-DSQLITE_ENABLE_COLUMN_METADATA" "-DSQLITE_ENABLE_DBSTAT_VTAB" "-DSQLITE_ENABLE_FTS3" "-DSQLITE_ENABLE_FTS3_PARENTHESIS" "-DSQLITE_ENABLE_FTS5" "-DSQLITE_ENABLE_JSON1" "-DSQLITE_ENABLE_LOAD_EXTENSION=1" "-DSQLITE_ENABLE_MEMORY_MANAGEMENT" "-DSQLITE_ENABLE_RTREE" "-DSQLITE_ENABLE_STAT2" "-DSQLITE_ENABLE_STAT4" "-DSQLITE_SOUNDEX" "-DSQLITE_THREADSAFE=1" "-DSQLITE_USE_URI" "-DHAVE_USLEEP=1" "-DSQLITE_HAVE_ISNAN" "-o" "/home/sunny/project/rust/releasenote/target/debug/build/libsqlite3-sys-3a505c93d042b0e8/out/sqlite3/sqlite3.o" "-c" "sqlite3/sqlite3.c"
+cargo:warning=sqlite3/sqlite3.c: In function ‘soundexFunc’:
+cargo:warning=sqlite3/sqlite3.c:115354:7: warning: unused parameter ‘argc’ [-Wunused-parameter]
+cargo:warning=   int argc,
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘statConnect’:
+cargo:warning=sqlite3/sqlite3.c:196078:9: warning: unused parameter ‘pAux’ [-Wunused-parameter]
+cargo:warning=   void *pAux,
+cargo:warning=         ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘statBestIndex’:
+cargo:warning=sqlite3/sqlite3.c:196130:40: warning: unused parameter ‘tab’ [-Wunused-parameter]
+cargo:warning= static int statBestIndex(sqlite3_vtab *tab, sqlite3_index_info *pIdxInfo){
+cargo:warning=                                        ^~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘statFilter’:
+cargo:warning=sqlite3/sqlite3.c:196538:27: warning: unused parameter ‘idxStr’ [-Wunused-parameter]
+cargo:warning=   int idxNum, const char *idxStr,
+cargo:warning=                           ^~~~~~
+cargo:warning=sqlite3/sqlite3.c:196539:7: warning: unused parameter ‘argc’ [-Wunused-parameter]
+cargo:warning=   int argc, sqlite3_value **argv
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘sqlite3_db_status’:
+cargo:warning=sqlite3/sqlite3.c:21035:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       op = SQLITE_DBSTATUS_CACHE_WRITE+1;
+cargo:warning=       ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:21037:5: note: here
+cargo:warning=     case SQLITE_DBSTATUS_CACHE_HIT:
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘sqlite3_str_vappendf’:
+cargo:warning=sqlite3/sqlite3.c:27799:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         flag_long = sizeof(char*)==sizeof(i64) ? 2 :
+cargo:warning=         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=                      sizeof(char*)==sizeof(long int) ? 1 : 0;
+cargo:warning=                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:27802:7: note: here
+cargo:warning=       case etORDINAL:
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:27804:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         cThousand = 0;
+cargo:warning=         ~~~~~~~~~~^~~
+cargo:warning=sqlite3/sqlite3.c:27806:7: note: here
+cargo:warning=       case etDECIMAL:
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘resolveP2Values’:
+cargo:warning=sqlite3/sqlite3.c:77303:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=           if( pOp->p2!=0 ) p->readOnly = 0;
+cargo:warning=             ^
+cargo:warning=sqlite3/sqlite3.c:77306:9: note: here
+cargo:warning=         case OP_AutoCommit:
+cargo:warning=         ^~~~
+cargo:warning=sqlite3/sqlite3.c:77344:26: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         case OP_VFilter: {
+cargo:warning=                          ^
+cargo:warning=sqlite3/sqlite3.c:77353:9: note: here
+cargo:warning=         default: {
+cargo:warning=         ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘sqlite3VdbeExec’:
+cargo:warning=sqlite3/sqlite3.c:84944:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=   if( (pIn3->flags & MEM_Null)==0 ) break;
+cargo:warning=     ^
+cargo:warning=sqlite3/sqlite3.c:84978:1: note: here
+cargo:warning= case OP_Halt: {
+cargo:warning= ^~~~
+cargo:warning=sqlite3/sqlite3.c:85113:15: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=   pOp->opcode = OP_String;
+cargo:warning=               ^
+cargo:warning=sqlite3/sqlite3.c:85130:1: note: here
+cargo:warning= case OP_String: {          /* out2 */
+cargo:warning= ^~~~
+cargo:warning=sqlite3/sqlite3.c:88339:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning= case OP_IfNoHope: {     /* jump, in3 */
+cargo:warning=                   ^
+cargo:warning=sqlite3/sqlite3.c:88347:1: note: here
+cargo:warning= case OP_NoConflict:     /* jump, in3 */
+cargo:warning= ^~~~
+cargo:warning=sqlite3/sqlite3.c:89268:38: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=   p->aCounter[SQLITE_STMTSTATUS_SORT]++;
+cargo:warning=   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+cargo:warning=sqlite3/sqlite3.c:89283:1: note: here
+cargo:warning= case OP_Rewind: {        /* jump */
+cargo:warning= ^~~~
+cargo:warning=sqlite3/sqlite3.c:90580:15: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=   pOp->opcode = OP_AggStep1;
+cargo:warning=               ^
+cargo:warning=sqlite3/sqlite3.c:90583:1: note: here
+cargo:warning= case OP_AggStep1: {
+cargo:warning= ^~~~
+cargo:warning=sqlite3/sqlite3.c:91452:15: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=   pOp->opcode += 2;
+cargo:warning=   ~~~~~~~~~~~~^~~~
+cargo:warning=sqlite3/sqlite3.c:91455:1: note: here
+cargo:warning= case OP_PureFunc:              /* group */
+cargo:warning= ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘resolveExprStep’:
+cargo:warning=sqlite3/sqlite3.c:96674:20: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=     case TK_ISNOT: {
+cargo:warning=                    ^
+cargo:warning=sqlite3/sqlite3.c:96690:5: note: here
+cargo:warning=     case TK_BETWEEN:
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘sqlite3ExprCodeTarget’:
+cargo:warning=sqlite3/sqlite3.c:101035:25: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=     case TK_AGG_COLUMN: {
+cargo:warning=                         ^
+cargo:warning=sqlite3/sqlite3.c:101048:5: note: here
+cargo:warning=     case TK_COLUMN: {
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘exprImpliesNotNull’:
+cargo:warning=sqlite3/sqlite3.c:102582:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       if( exprImpliesNotNull(pParse, p->pRight, pNN, iTab, seenNot) ) return 1;
+cargo:warning=         ^
+cargo:warning=sqlite3/sqlite3.c:102585:5: note: here
+cargo:warning=     case TK_SPAN:
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘impliesNotNullRow’:
+cargo:warning=sqlite3/sqlite3.c:102715:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       if( (pExpr->pLeft->op==TK_COLUMN && IsVirtual(pExpr->pLeft->y.pTab))
+cargo:warning=           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=        || (pExpr->pRight->op==TK_COLUMN && IsVirtual(pExpr->pRight->y.pTab))
+cargo:warning=        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:102720:5: note: here
+cargo:warning=     default:
+cargo:warning=     ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘fkActionTrigger’:
+cargo:warning=sqlite3/sqlite3.c:117309:11: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         if( !pChanges ){
+cargo:warning=           ^
+cargo:warning=sqlite3/sqlite3.c:117313:7: note: here
+cargo:warning=       default:
+cargo:warning=       ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘sqlite3GenerateConstraintChecks’:
+cargo:warning=sqlite3/sqlite3.c:118782:17: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         onError = OE_Abort;
+cargo:warning=                 ^
+cargo:warning=sqlite3/sqlite3.c:118786:7: note: here
+cargo:warning=       case OE_Abort:
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:118944:17: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         onError = OE_Abort;
+cargo:warning=                 ^
+cargo:warning=sqlite3/sqlite3.c:118947:7: note: here
+cargo:warning=       case OE_Rollback:
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:119007:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         sqlite3UpsertDoUpdate(pParse, pUpsert, pTab, 0, iDataCur);
+cargo:warning=         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:119011:7: note: here
+cargo:warning=       case OE_Ignore: {
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:119223:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         sqlite3UpsertDoUpdate(pParse, pUpsert, pTab, pIdx, iIdxCur+ix);
+cargo:warning=         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:119227:7: note: here
+cargo:warning=       case OE_Ignore: {
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘sqlite3GetToken’:
+cargo:warning=sqlite3/sqlite3.c:155400:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       if( !sqlite3Isdigit(z[1]) )
+cargo:warning=         ^
+cargo:warning=sqlite3/sqlite3.c:155409:5: note: here
+cargo:warning=     case CC_DIGIT: {
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c:155499:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       if( z[1]=='\'' ){
+cargo:warning=         ^
+cargo:warning=sqlite3/sqlite3.c:155513:5: note: here
+cargo:warning=     case CC_ID: {
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘fts3ColumnMethod’:
+cargo:warning=sqlite3/sqlite3.c:165356:14: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=         iCol = p->nColumn;
+cargo:warning=         ~~~~~^~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:165360:5: note: here
+cargo:warning=     default:
+cargo:warning=     ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘fts3SnippetFunc’:
+cargo:warning=sqlite3/sqlite3.c:165599:20: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=     case 6: nToken = sqlite3_value_int(apVal[5]);
+cargo:warning=             ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:165600:5: note: here
+cargo:warning=     case 5: iCol = sqlite3_value_int(apVal[4]);
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c:165600:18: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=     case 5: iCol = sqlite3_value_int(apVal[4]);
+cargo:warning=             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:165601:5: note: here
+cargo:warning=     case 4: zEllipsis = (const char*)sqlite3_value_text(apVal[3]);
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c:165601:23: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=     case 4: zEllipsis = (const char*)sqlite3_value_text(apVal[3]);
+cargo:warning=             ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:165602:5: note: here
+cargo:warning=     case 3: zEnd = (const char*)sqlite3_value_text(apVal[2]);
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c:165602:18: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=     case 3: zEnd = (const char*)sqlite3_value_text(apVal[2]);
+cargo:warning=             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:165603:5: note: here
+cargo:warning=     case 2: zStart = (const char*)sqlite3_value_text(apVal[1]);
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘jsonRenderNode’:
+cargo:warning=sqlite3/sqlite3.c:180779:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       if( pNode->jnFlags & JNODE_RAW ){
+cargo:warning=         ^
+cargo:warning=sqlite3/sqlite3.c:180785:5: note: here
+cargo:warning=     case JSON_REAL:
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘jsonReturn’:
+cargo:warning=sqlite3/sqlite3.c:180893:7: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       int_as_real: /* fall through to real */;
+cargo:warning=       ^~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:180895:5: note: here
+cargo:warning=     case JSON_REAL: {
+cargo:warning=     ^~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘jsonEachColumn’:
+cargo:warning=sqlite3/sqlite3.c:182546:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       if( p->bRecursive ){
+cargo:warning=         ^
+cargo:warning=sqlite3/sqlite3.c:182556:5: note: here
+cargo:warning=     default: {
+cargo:warning=     ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘rtreeCallbackConstraint’:
+cargo:warning=sqlite3/sqlite3.c:184056:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+32, &c); aCoord[8] = c.f;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184057:7: note: here
+cargo:warning=       case 8:   readCoord(pCellData+28, &c); aCoord[7] = c.f;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184058:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+24, &c); aCoord[6] = c.f;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184059:7: note: here
+cargo:warning=       case 6:   readCoord(pCellData+20, &c); aCoord[5] = c.f;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184060:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+16, &c); aCoord[4] = c.f;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184061:7: note: here
+cargo:warning=       case 4:   readCoord(pCellData+12, &c); aCoord[3] = c.f;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184062:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+8,  &c); aCoord[2] = c.f;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184063:7: note: here
+cargo:warning=       default:  readCoord(pCellData+4,  &c); aCoord[1] = c.f;
+cargo:warning=       ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184071:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+32, &c); aCoord[8] = c.i;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184072:7: note: here
+cargo:warning=       case 8:   readCoord(pCellData+28, &c); aCoord[7] = c.i;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184073:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+24, &c); aCoord[6] = c.i;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184074:7: note: here
+cargo:warning=       case 6:   readCoord(pCellData+20, &c); aCoord[5] = c.i;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184075:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+16, &c); aCoord[4] = c.i;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184076:7: note: here
+cargo:warning=       case 4:   readCoord(pCellData+12, &c); aCoord[3] = c.i;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184077:56: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=                 readCoord(pCellData+8,  &c); aCoord[2] = c.i;
+cargo:warning=                                              ~~~~~~~~~~^~~~~
+cargo:warning=sqlite3/sqlite3.c:184078:7: note: here
+cargo:warning=       default:  readCoord(pCellData+4,  &c); aCoord[1] = c.i;
+cargo:warning=       ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘rtreeNonleafConstraint’:
+cargo:warning=sqlite3/sqlite3.c:184130:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       if( p->op!=RTREE_EQ ) break;  /* RTREE_LE and RTREE_LT end here */
+cargo:warning=         ^
+cargo:warning=sqlite3/sqlite3.c:184133:5: note: here
+cargo:warning=     default: /* RTREE_GT or RTREE_GE,  or fallthrough of RTREE_EQ */
+cargo:warning=     ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c: In function ‘cellArea’:
+cargo:warning=sqlite3/sqlite3.c:184885:22: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 5:  area  = p->aCoord[9].f - p->aCoord[8].f;
+cargo:warning=                ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184886:7: note: here
+cargo:warning=       case 4:  area *= p->aCoord[7].f - p->aCoord[6].f;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184886:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 4:  area *= p->aCoord[7].f - p->aCoord[6].f;
+cargo:warning=                ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184887:7: note: here
+cargo:warning=       case 3:  area *= p->aCoord[5].f - p->aCoord[4].f;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184887:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 3:  area *= p->aCoord[5].f - p->aCoord[4].f;
+cargo:warning=                ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184888:7: note: here
+cargo:warning=       case 2:  area *= p->aCoord[3].f - p->aCoord[2].f;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184888:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 2:  area *= p->aCoord[3].f - p->aCoord[2].f;
+cargo:warning=                ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184889:7: note: here
+cargo:warning=       default: area *= p->aCoord[1].f - p->aCoord[0].f;
+cargo:warning=       ^~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184895:22: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 5:  area  = (i64)p->aCoord[9].i - (i64)p->aCoord[8].i;
+cargo:warning=                ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184896:7: note: here
+cargo:warning=       case 4:  area *= (i64)p->aCoord[7].i - (i64)p->aCoord[6].i;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184896:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 4:  area *= (i64)p->aCoord[7].i - (i64)p->aCoord[6].i;
+cargo:warning=                ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184897:7: note: here
+cargo:warning=       case 3:  area *= (i64)p->aCoord[5].i - (i64)p->aCoord[4].i;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184897:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 3:  area *= (i64)p->aCoord[5].i - (i64)p->aCoord[4].i;
+cargo:warning=                ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184898:7: note: here
+cargo:warning=       case 2:  area *= (i64)p->aCoord[3].i - (i64)p->aCoord[2].i;
+cargo:warning=       ^~~~
+cargo:warning=sqlite3/sqlite3.c:184898:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+cargo:warning=       case 2:  area *= (i64)p->aCoord[3].i - (i64)p->aCoord[2].i;
+cargo:warning=                ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cargo:warning=sqlite3/sqlite3.c:184899:7: note: here
+cargo:warning=       default: area *= (i64)p->aCoord[1].i - (i64)p->aCoord[0].i;
+cargo:warning=       ^~~~~~~
+exit code: 0
+AR_x86_64-unknown-linux-gnu = None
+AR_x86_64_unknown_linux_gnu = None
+HOST_AR = None
+AR = None
+running: "ar" "crs" "/home/sunny/project/rust/releasenote/target/debug/build/libsqlite3-sys-3a505c93d042b0e8/out/libsqlite3.a" "/home/sunny/project/rust/releasenote/target/debug/build/libsqlite3-sys-3a505c93d042b0e8/out/sqlite3/sqlite3.o"
+exit code: 0
+cargo:rustc-link-lib=static=sqlite3
+cargo:rustc-link-search=native=/home/sunny/project/rust/releasenote/target/debug/build/libsqlite3-sys-3a505c93d042b0e8/out
+cargo:lib_dir=/home/sunny/project/rust/releasenote/target/debug/build/libsqlite3-sys-3a505c93d042b0e8/out
