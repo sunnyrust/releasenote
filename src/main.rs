@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate clap;
 extern crate libc;
+extern crate chrono;
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
@@ -9,12 +10,13 @@ use serde::{Deserialize, Serialize};
 //use time::Timespec;  //Also, it should be noted, that time v0.1.* must be used, because Timespec was removed in v0.2.0.
 use clap::App;
 use std::fmt;
+use chrono::prelude::*;
 
-const HEADER: &'static str = "header.tpl"; 
-const TABLE_TR: &'static str = "tr.tpl"; 
-const FOOTER: &'static str = "footer.tpl"; 
+const HEADER: &'static str = "./temple/header.tpl"; 
+const TABLE_TR: &'static str = "./temple/tr.tpl"; 
+const FOOTER: &'static str = "./temple/footer.tpl"; 
 const DB_NAME: &'static str = "releaseNote.db"; 
-const HTML: &'static str = "releaseNote.html"; 
+const HTML: &'static str = "releaseNote"; 
 const SOURCE_NAME: &'static str = "rn.txt";
 const MARKDOWN_NAME: &'static str = "releaseNote.md"; 
 
@@ -40,9 +42,12 @@ impl Error for MyError {
         &self.details
     }
 }
+#[derive(Debug)]
 #[derive(Serialize, Deserialize)]
 struct Releasenote {
     id: Option<i32>,
+    env: String,
+    owner: String,
     name: String,
     version:  Option<String>,
     address: Option<String>,
@@ -56,6 +61,8 @@ fn create_db(conn: &Connection) {
     match conn.execute(
         "CREATE TABLE releasenote (
                     id              INTEGER PRIMARY KEY,
+                    env             TEXT NOT NULL,
+                    owner           TEXT NOT NULL,
                     name            TEXT NOT NULL,
                     address         TEXT  NULL,
                     version         TEXT  NULL,
@@ -83,34 +90,52 @@ fn to_html() -> std::io::Result<()>{
     let mut tr = String::new();
     file.read_to_string(&mut tr)?;
     let conn = Connection::open(DB_NAME).unwrap();
-    let mut stmt = conn.prepare("SELECT id,name,version,address,git,docker, pubtime,data FROM releasenote").unwrap();
+    let mut stmt = conn.prepare("SELECT id,env,owner,name,version,address,git,docker, pubtime,data FROM releasenote").unwrap();
     let releasenote_iter = stmt.query_map(params![], |row| {
         Ok(Releasenote {
             id: row.get(0).unwrap(),
-            name: row.get(1).unwrap(),
-            version: row.get(2).unwrap(),
-            address: row.get(3).unwrap(),
-            git: row.get(4).unwrap(),
-            docker: row.get(5).unwrap(),
-            pubtime: row.get(6).unwrap(),
-            data: row.get(7).unwrap(),
+            env: row.get(1).unwrap(),
+            owner: row.get(2).unwrap(),
+            name: row.get(3).unwrap(),
+            version: row.get(4).unwrap(),
+            address: row.get(5).unwrap(),
+            git: row.get(6).unwrap(),
+            docker: row.get(7).unwrap(),
+            pubtime: row.get(8).unwrap(),
+            data: row.get(9).unwrap(),
         })
     }).unwrap();
+    let mut i=0;
+    for rn in releasenote_iter  {
+        let mut tr_tmp = String::new();
+        tr_tmp=tr.clone();
+        if i % 2==0{
+            tr_tmp = str::replace(&tr_tmp, "#FFC0CB", "#FAEBD7");
+        }
+        //#FAEBD7
+        
+        let r=rn.unwrap();
+        let mut name=(r.name).to_string()+"<br />("+&(r.owner).to_string()+")"+"<br />("+&(r.env).to_string()+")";
+        tr_tmp = str::replace(&tr_tmp, "#0#", &name);
+        tr_tmp = str::replace(&tr_tmp, "#1#", &r.address.unwrap().as_str());
+        tr_tmp = str::replace(&tr_tmp, "#2#", &r.version.unwrap().as_str());
+        tr_tmp = str::replace(&tr_tmp, "#3#", &r.git.unwrap().as_str());
+        tr_tmp = str::replace(&tr_tmp, "#4#", &r.docker.unwrap().as_str());
+        html += &tr_tmp;
+        i+=1;
+        //  println!("Found person {:?}", r.name);
+    }
 
-    // for rn in releasenote_iter  {
-    //     println!("Found person {:#?}", Some(rn));
-    // }
-
-    tr = str::replace(&tr, "#0#", "CMS");
-    tr = str::replace(&tr, "#1#", "www.baidu.com");
-    html += &tr;
     file = File::open(FOOTER.to_string())?;
     let mut cont = String::new();
     file.read_to_string(&mut cont)?;
     html += &cont;
     // println!("{:#?}",html);
-    
-    let mut f = File::create( HTML.to_string())?;
+    let mut html_filename=HTML.to_string();
+    let now:NaiveDateTime = Local::now().naive_local();
+    html_filename += &now.format("%Y%m%d-%H%M%S").to_string();
+    html_filename += ".html";
+    let mut f = File::create( &html_filename)?;
     f.write_all(html.as_bytes())?;
     f.sync_data()?;
     Ok(())
@@ -126,19 +151,13 @@ fn read_file(filename: String) {
             use encoding::all::{UTF_8};
             for line in BufReaderEncoding::new(file, UTF_8).lines().map(|l| l.unwrap()){
                 let json=line.to_string();
-                // let j=r#"{"name":"SmartOMP","version":"V1.0.1.3-20200301","address":"10.11.35.104:9099","git":"a1d7c36ccc449178254458e14319c8985fe76253","docker":"dockerhub.cloudminds.com/SmartOMP-101","pubtime":"2020-03-01 19:58:25"}"#;
                 if json.len()>3{
                     let u: Releasenote = serde_json::from_str(&json).unwrap();
-                    // println!("data = {:#?}", u.data);
-                    // let mut data = "" ;
-                    // if u.data!="None"{
-                    //     data=Some(u.data);
-                    // }
                     let pubtime = Some(u.pubtime);
                     conn.execute(
-                        "INSERT INTO releasenote (name,address,version,git,docker, pubtime,data)
-                                  VALUES (?1, ?2,?3,?4,?5,?6,?7)",
-                        params![u.name,u.address,u.version,u.git,u.docker,pubtime,u.data],
+                        "INSERT INTO releasenote (env,owner,name,address,version,git,docker, pubtime,data)
+                                  VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)",
+                        params![u.env,u.owner,u.name,u.address,u.version,u.git,u.docker,pubtime,u.data],
                     ).unwrap();
                 }              
              }
@@ -198,5 +217,6 @@ fn main() {
         libc::signal(libc::SIGPIPE, libc::SIG_DFL);
     }
     flag();
-    // println!("Hello, world!");
+    // let now:NaiveDateTime = Local::now().naive_local();
+    // println!("time:{}",now.format("%Y%m%d-%H%M%S").to_string());
 }
