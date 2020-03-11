@@ -80,7 +80,7 @@ fn create_db(conn: &Connection) {
 
 
 /// to_html
-fn to_html() -> std::io::Result<()>{
+fn to_html( strenv:String) -> std::io::Result<()>{
     let mut file = File::open(HEADER.to_string())?;
     let mut contents = String::new();
     file.read_to_string(&mut contents)?;
@@ -90,8 +90,8 @@ fn to_html() -> std::io::Result<()>{
     let mut tr = String::new();
     file.read_to_string(&mut tr)?;
     let conn = Connection::open(DB_NAME).unwrap();
-    let mut stmt = conn.prepare("SELECT id,env,owner,name,version,address,git,docker, pubtime,data FROM releasenote").unwrap();
-    let releasenote_iter = stmt.query_map(params![], |row| {
+    let mut stmt = conn.prepare("SELECT id,env,owner,name,version,address,git,docker, pubtime,data FROM releasenote  WHERE env  like '%' || ? || '%'").unwrap();
+    let releasenote_iter = stmt.query_map(params![&strenv], |row| {
         Ok(Releasenote {
             id: row.get(0).unwrap(),
             env: row.get(1).unwrap(),
@@ -123,14 +123,12 @@ fn to_html() -> std::io::Result<()>{
         tr_tmp = str::replace(&tr_tmp, "#4#", &r.docker.unwrap().as_str());
         html += &tr_tmp;
         i+=1;
-        //  println!("Found person {:?}", r.name);
     }
 
     file = File::open(FOOTER.to_string())?;
     let mut cont = String::new();
     file.read_to_string(&mut cont)?;
     html += &cont;
-    // println!("{:#?}",html);
     let mut html_filename=HTML.to_string();
     let now:NaiveDateTime = Local::now().naive_local();
     html_filename += &now.format("%Y%m%d-%H%M%S").to_string();
@@ -176,7 +174,6 @@ fn flag() -> () {
         + &crate_version!().to_owned()
         + "  git:"
         + &crate_description!().to_owned();
-    // println!("{:?}",s);
     let matches = App::new("Sunnycat")
         .version(&*s)
         .author(crate_authors!())
@@ -188,7 +185,7 @@ fn flag() -> () {
         .args_from_usage("-c,--createdb '创建数据库'")
         .args_from_usage("-s,--show=[NAME] '显示某个name的信息'")
         .args_from_usage("-i,--insert '插入数据库'")
-        .args_from_usage("-H,--html '数据库到HTML'")
+        .args_from_usage("-H,--html=[ENV] '数据库到HTML'")
         .get_matches();
 
     if matches.is_present("createdb") {
@@ -207,7 +204,9 @@ fn flag() -> () {
     }
 
     if matches.is_present("html"){
-        let _err= to_html();
+        let env = matches.value_of("html").unwrap_or("");
+        // println!{"env:{:#?}",env}
+        let _err= to_html(env.to_string());
     }
 }
 
