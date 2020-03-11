@@ -1,0 +1,3 @@
+{"env":"116","owner":"Sunny","name":"ReleaseNote","version":"V0.2.0-20200226","address":"http://10.116.0.116:8686","git":"c46aa2306e58d15daf9ffe0658fcab86c6ee4683","docker":"harbor.xxx.com/releasenote:V0.2.0-20200226-4","pubtime":"2020-03-02 20:58:25"}
+{"env":"116","owner":"Sunny","name":"Sunny","version":"V0.2.0-20200226","address":"http://10.116.0.116:8080","git":"c46aa2306e58d15daf9ffe0658fcab86c6ee4683","docker":"harbor.xxx.com/Sunny:V0.2.0-20200226-4","pubtime":"2020-03-02 20:58:25"}
+
