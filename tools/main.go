@@ -16,6 +16,7 @@ var (
 	sSheet string
 )
 
+//doExcelRow ...
 func doExcelRow(f *excelize.File, bOdd bool, offset int, rn models.Releasenote) {
 	sName := `{"border":[
         {"type":"bottom","color":"000000","style":1},
@@ -75,7 +76,7 @@ func doExcelRow(f *excelize.File, bOdd bool, offset int, rn models.Releasenote) 
 	sC3 := "C" + sThree
 	sC4 := "C" + sFour
 	f.SetRowHeight(sSheet, 1+offset, 80)
-	f.SetCellValue(sSheet, sA1, rn.Name+"\r\n("+rn.Owner+")")
+	f.SetCellValue(sSheet, sA1, rn.Name+"\r\n("+rn.Owner+")"+"\r\n("+rn.Env+")")
 	f.MergeCell(sSheet, sA1, sA4)
 	f.SetCellStyle(sSheet, sA1, sA4, styleName)
 	f.SetCellValue(sSheet, sB1, `接口地址`)
@@ -88,10 +89,10 @@ func doExcelRow(f *excelize.File, bOdd bool, offset int, rn models.Releasenote) 
 	f.SetCellValue(sSheet, sC3, rn.Git)
 	f.SetCellValue(sSheet, sC4, rn.Docker)
 	f.SetCellStyle(sSheet, sC1, sC4, styleTitle)
-
 }
-func WriteExcelCells(f *excelize.File, rns []models.Releasenote) {
 
+//WriteExcelCells ...
+func WriteExcelCells(f *excelize.File, rns []models.Releasenote) {
 	for index, v := range rns {
 		if index%2 == 0 {
 			// fmt.Println("====>", index, v)
@@ -107,15 +108,10 @@ func WriteExcelCells(f *excelize.File, rns []models.Releasenote) {
 func CreateExcel(filename string, rns []interface{}) {
 	f := excelize.NewFile()
 	index := f.NewSheet(sSheet)
-	// Create a new sheet.
-	//index := f.NewSheet("Sheet2")
-	// Set value of a cell.
-
 	var rn []models.Releasenote
 	for _, v := range rns {
 		rn = append(rn, v.(models.Releasenote))
 	}
-	// fmt.Println(rn)
 	WriteExcelCells(f, rn)
 
 	f.SetColWidth(sSheet, "A", "A", 35)
@@ -179,6 +175,8 @@ func main() {
 	if err == nil {
 		if argNum > 1 {
 			CreateExcel(os.Args[1], result)
+		} else {
+			CreateExcel(`./demo.xlsx`, result)
 		}
 	} else {
 		fmt.Println("数据库里面没有数据，没法生成Excel")
